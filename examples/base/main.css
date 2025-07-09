@@ -22,9 +22,6 @@ ol, ul { list-style: none; }
 blockquote, q {	quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after {	content: ''; content: none; }
 table { border-collapse: collapse; border-spacing: 0; }
-.cf:before, .cf:after { content: " "; display: table; }
-.cf:after { clear: both; }
-.cf { *zoom: 1; }
 
 * { box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; }
 html { overflow-y: scroll; }
@@ -47,7 +44,8 @@ header { margin: 2em auto 0 auto; text-align: center; }
 .card { margin: 0 0 1em 0; background-color: #fff; padding: 1.5em; border-radius: 6px; }
 .card:last-of-type { margin-bottom: 0; }
 .card button { padding: 0.5em 2em; cursor: pointer; }
-.card p { margin: 1em 0 0 0; }
+.card p { margin: 0 0 1em 0; }
+.card p:last-of-type { margin: 0 0 0 0; }
 .card ul { margin: 1em 0 0 0; }
 .card li { margin-left: 2em; list-style-type: disc; margin-bottom: 1em; line-height: 1.25em; }
 .card li:last-of-type { margin-bottom: 0; }
