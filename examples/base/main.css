@@ -27,21 +27,24 @@ table { border-collapse: collapse; border-spacing: 0; }
 html { overflow-y: scroll; }
 img { max-width: 100%; }
 a, a:visited { text-decoration: underline; color: rgb(0, 0, 0); -transition: all 0.15s ease-in-out; }
+a:hover { color: #F00; }
 strong { font-weight: bold; }
 
 /* THEME */
 
-body { font-family: 'Arial', sans-serif; font-size: 1em; background-color: rgb(207, 207, 207); background: linear-gradient(#dbe8ff, #1d5a8f) }
-h1 { font-size: 2em; font-weight: bold; margin-bottom: 0.5em; color: #000; }
+body { font-family: 'Arial', sans-serif; font-size: 1em; color: #000; background-color: rgb(207, 207, 207); background: linear-gradient(0deg,rgba(0, 194, 145, 1) 0%, rgba(194, 255, 197, 1) 100%); }
+h1 { font-size: 2em; font-weight: bold; margin-bottom: 0.5em;  }
 h2 { font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;  }
 em { font-style: italic; }
 p { line-height: 1.5em; }
+span.mono { font-family: monospace;}
+span.code { background-color: #e4e4e4; padding: 4px 8px; border-radius: 4px; }
 
 header, .content { max-width: 700px; margin: 0 auto; }
 header { margin: 2em auto 0 auto; text-align: center; }
 .content { background-color: rgba(255, 255, 255, 0.5); margin: 2em auto; padding: 2em; border-radius: 16px; box-shadow: 0 12px 32px rgb(0, 0, 0, 0.5); }
 
-.card { margin: 0 0 1em 0; background-color: #fff; padding: 1.5em; border-radius: 6px; }
+.card { margin: 0 0 1em 0; background-color: #FFF; box-shadow: 1px 1px 1px rgba(0,0,0,0.5); padding: 1.5em; border-radius: 8px; }
 .card:last-of-type { margin-bottom: 0; }
 .card button { padding: 0.5em 2em; cursor: pointer; }
 .card p { margin: 0 0 1em 0; }
