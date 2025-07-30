@@ -2,6 +2,7 @@
     <head>
         <title>JavaScript Does THAT!? Examples</title>
         <link href="base/main.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="base/demo.js"></script>
     </head>
 
     <body>
@@ -27,15 +28,20 @@
                 <button type="button" onclick="">Run Demo</button>
                 <p>asdfasdf sdaf sdfasd asfd</p>
 
-                <div class="output code">
-                    Coords: 15.342, -23.332
-                </div>
+                <div id="Console" class="output code"></div>
 
             </div>
 
         </div>
         
-        <script type="text/javascript">
+        <script type="text/javascript"> 
+
+            (function() {
+
+                Demo.clear();
+                Demo.log("Console", "123");
+
+            })();
 
         </script>
 
