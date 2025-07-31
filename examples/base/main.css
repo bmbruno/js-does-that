@@ -42,11 +42,13 @@ span.code { background-color: #e4e4e4; padding: 4px 8px; border-radius: 4px; }
 
 header, .content { max-width: 700px; margin: 0 auto; }
 header { margin: 2em auto 0 auto; text-align: center; }
-.content { background-color: rgba(255, 255, 255, 0.5); margin: 2em auto; padding: 2em; border-radius: 16px; box-shadow: 0 12px 32px rgb(0, 0, 0, 0.5); }
+.content { background-color: rgba(255, 255, 255, 0.5); margin: 2em auto; padding: 2em; border-radius: 16px; box-shadow: 0 12px 32px rgb(0, 0, 0, 0.5); max-width: 95%; }
 
 .card { margin: 0 0 1em 0; background-color: #FFF; box-shadow: 1px 1px 1px rgba(0,0,0,0.5); padding: 1.5em; border-radius: 8px; }
 .card:last-of-type { margin-bottom: 0; }
 .card button { padding: 0.5em 2em; margin-bottom: 1em; cursor: pointer; }
+.card button:hover { box-shadow: 1px 1px 1px #454545; }
+.card button:active { position: relative; top: 1; left: 1; box-shadow: none; }
 .card p { margin: 0 0 1em 0; }
 .card p:last-of-type { margin: 0 0 0 0; }
 .card ul { margin: 1em 0 0 0; }
@@ -54,3 +56,8 @@ header { margin: 2em auto 0 auto; text-align: center; }
 .card li:last-of-type { margin-bottom: 0; }
 .card .output { background-color: rgb(216, 216, 216); margin: 1em 0 0 0; padding: 1.5em 1em; border-radius: 4px; }
 .card .output.code { font-family: monospace; font-size: 1.25em;}
+
+@media (min-width: 48em)
+{
+   .content { max-width: 700px }
+}

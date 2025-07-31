@@ -3,6 +3,7 @@
         <title>JavaScript Does THAT!? Examples</title>
         <link href="base/main.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="base/demo.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
@@ -15,25 +16,30 @@
         <div class="content">
 
             <div class="card">
+
                 <h2>What is <span class="mono">geolocation</span>?</h2>
+                <p>Gets the current device's latitude/longitude coordinates. Also allows for </p>
+
+                <h2>When should you use <span class="mono">geolocation</span>?</h2>
                 <p>TODO</p>
 
-                <h2>When and why should you use <span class="mono">geolocation</span>?</h2>
-                <p>TODO</p>
             </div>
 
             <div class="card">
-                <h2>Demo: FeatureA</h2>
+
+                <h2>Demo: get a device's location</h2>
 
                 <button type="button" onclick="getLocation();">Low Accuracy</button>
-                <p>asdfasdf</p>
+                <p>Attempts to get a device's location with normal accuracy.</p>
 
                 <button type="button" onclick="getLocationAccurate();">High Accuracy</button>
-                <p>asdfasdf</p>
+                <p>Attempts to get a device's location with high accuracy. This may trigger the GPS module on a user's device and use considerable resources.</p>
+
+                <h2>Demo: watch a device's location in realtime</h2>
 
                 <button type="button" onclick="watchLocation();">Watch Location</button>
                 <button type="button" onclick="stopWatching();">Stop Watching</button>
-                <p>as</p>
+                <p>Calls the 'success' function every time the device's location changes.</p>
 
                 <div id="Console" class="output code"></div>
 
