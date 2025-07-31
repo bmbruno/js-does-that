@@ -1,16 +1,16 @@
 window.Demo = {
 
-    log: (elementID, message) => {
+    log: (message) => {
 
-        let console = document.getElementById(elementID);
+        let console = document.getElementById("Console");
         if (console)
             console.innerHTML += `${message}<br/>`;
 
     },
 
-    clear: (elementID) => {
+    clear: () => {
 
-        let console = document.getElementById(elementID);
+        let console = document.getElementById("Console");
         if (console)
             console.innerHTML = "";
     }

@@ -25,8 +25,11 @@
             <div class="card">
                 <h2>Demo: FeatureA</h2>
 
-                <button type="button" onclick="">Run Demo</button>
-                <p>asdfasdf sdaf sdfasd asfd</p>
+                <button type="button" onclick="getLocation();">Low Accuracy</button>
+                <p>asdfasdf</p>
+
+                <button type="button" onclick="getLocationAccurate();">High Accuracy</button>
+                <p>asdfasdf</p>
 
                 <div id="Console" class="output code"></div>
 
@@ -36,12 +39,50 @@
         
         <script type="text/javascript"> 
 
-            (function() {
+            // Process a successful location request
+            let success = (pos) => {
 
                 Demo.clear();
-                Demo.log("Console", "123");
+                Demo.log(`Latitude: ${pos.coords.latitude}`);
+                Demo.log(`Longitude: ${pos.coords.longitude}`);
+                Demo.log(`Accuracy: ${pos.accuracy}`);
 
-            })();
+            };
+
+            // Handle an error state
+            // Codes explained here: https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError/code
+            let error = (err) => {
+
+                Demo.clear();
+                Demo.log('Error determining location.');
+                Demo.log(`Code: ${err.code}`)
+                Demo.log(`Message: ${err.message}`)
+
+            }
+
+            // Options object)
+            let options = {
+
+                // Max age to allow cached location; 0 = do not use any cached locations
+                maximumAge: 0,
+                
+                // Try using highly-accurate GPS information, if allowed by the user
+                enableHighAccuracy: false
+            }
+
+            let getLocation = () => {
+
+                options.enableHighAccuracy = false;
+                navigator.geolocation.getCurrentPosition(success, error, options);
+
+            };
+
+            let getLocationAccurate = () => {
+
+                options.enableHighAccuracy = true;
+                navigator.geolocation.getCurrentPosition(success, error, options);
+
+            };
 
         </script>
 
