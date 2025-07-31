@@ -31,6 +31,10 @@
                 <button type="button" onclick="getLocationAccurate();">High Accuracy</button>
                 <p>asdfasdf</p>
 
+                <button type="button" onclick="watchLocation();">Watch Location</button>
+                <button type="button" onclick="stopWatching();">Stop Watching</button>
+                <p>as</p>
+
                 <div id="Console" class="output code"></div>
 
             </div>
@@ -38,6 +42,9 @@
         </div>
         
         <script type="text/javascript"> 
+
+            // ID of the watchLocation handler
+            let watchID;
 
             // Process a successful location request
             let success = (pos) => {
@@ -60,7 +67,7 @@
 
             }
 
-            // Options object)
+            // Options object
             let options = {
 
                 // Max age to allow cached location; 0 = do not use any cached locations
@@ -83,6 +90,35 @@
                 navigator.geolocation.getCurrentPosition(success, error, options);
 
             };
+
+            //
+            // Watch a location for changes and update coords
+            //
+
+            // Process a successful location request
+            let successWatch = (pos) => {
+
+                Demo.clear();
+                Demo.log("Watching location...");
+                Demo.log(`Latitude: ${pos.coords.latitude}`);
+                Demo.log(`Longitude: ${pos.coords.longitude}`);
+                Demo.log(`Accuracy: ${pos.accuracy}`);
+
+            };
+
+            let watchLocation = () => {
+
+                watchID = navigator.geolocation.watchPosition(successWatch, error, options);
+
+            }
+
+            let stopWatching = () => {
+
+                navigator.geolocation.clearWatch(watchID);
+                Demo.clear();
+                Demo.log("Cleared watch.");
+
+            }
 
         </script>
 
