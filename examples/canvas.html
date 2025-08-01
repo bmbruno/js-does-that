@@ -9,27 +9,29 @@
     <body>
         
         <header>
-            <h1>Geolocation</h1>
+            <h1>Canvas</h1>
             <p><a href="../index.html">Return to Main Menu</a></p>
         </header>
 
         <div class="content">
 
             <div class="card">
-                <h2>What is <span class="mono">geolocation</span>?</h2>
+                <h2>What is <span class="mono">canvas</span>?</h2>
                 <p>TODO</p>
 
-                <h2>When and why should you use <span class="mono">geolocation</span>?</h2>
+                <h2>When and why should you use <span class="mono">canvas</span>?</h2>
                 <p>TODO</p>
             </div>
 
-            <div class="card">
-                <h2>Demo: FeatureA</h2>
+            <div class="card" style="overflow: auto;">
+                <h2>Demo: drawing primitives</h2>
 
                 <button type="button" onclick="">Run Demo</button>
                 <p>asdfasdf sdaf sdfasd asfd</p>
 
-                <div id="Console" class="output code"></div>
+                <div style="text-align: center;">
+                    <canvas id="CanvasDemo" width="400px" height="400px" style="border: 1px solid #000; border-radius: 4px; margin-top: 1em;"></canvas>
+                </div>
 
             </div>
 
@@ -39,8 +41,57 @@
 
             (function() {
 
-                Demo.clear();
-                Demo.log("Console", "123");
+                let canvas = document.getElementById("CanvasDemo");
+                let ctx = canvas.getContext("2d");
+
+                ctx.lineWidth = 20;
+
+                // Open symbol
+                ctx.beginPath();
+                ctx.moveTo(100, 105);
+                ctx.lineTo(50, 155);
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(50, 141);
+                ctx.lineTo(100, 190);
+                ctx.closePath();
+                ctx.stroke();
+
+                // Close symbol
+                ctx.beginPath();
+                ctx.moveTo(300, 105);
+                ctx.lineTo(350, 155);
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(350, 141);
+                ctx.lineTo(300, 190);
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.lineWidth = 30;
+
+                // Bars
+                ctx.beginPath();
+                ctx.moveTo(165, 85);
+                ctx.lineTo(135, 215);
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(220, 85);
+                ctx.lineTo(190, 215);
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(275, 85);
+                ctx.lineTo(245, 215);
+                ctx.closePath();
+                ctx.stroke();
 
             })();
 
