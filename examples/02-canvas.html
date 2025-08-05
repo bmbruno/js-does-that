@@ -17,16 +17,17 @@
 
             <div class="card">
                 <h2>What is <span class="mono">canvas</span>?</h2>
-                <p>TODO</p>
+                <p>The Canvas API and associated DOM elements provides primitive 2D and 3D drawing capabilities.</p>
 
                 <h2>When and why should you use <span class="mono">canvas</span>?</h2>
-                <p>TODO</p>
+                <p>The Canvas API is useful for drawing and animating complex graphics in a browser with a relatively simple set of APIs. Canvas is great for drawing complex charts, graphs, shapes, UIs, and animations, including JS-based games.</p>
+                <p>This contrasts with the more complex WebGL API, which provides hardware accelerated graphics rendering at the expense of implementation simplicity.</p>
             </div>
 
             <div class="card" style="overflow: auto;">
                 <h2>Demo: drawing primitives</h2>
 
-                <button type="button" onclick="">Run Demo</button>
+                <button type="button" onclick="drawLogo();">Run Demo</button>
                 <p>asdfasdf sdaf sdfasd asfd</p>
 
                 <div style="text-align: center;">
@@ -39,7 +40,9 @@
         
         <script type="text/javascript"> 
 
-            (function() {
+            let drawLogo = () => {
+
+                // Demo 1: 
 
                 let canvas = document.getElementById("CanvasDemo");
                 let ctx = canvas.getContext("2d");
@@ -61,14 +64,14 @@
 
                 // Close symbol
                 ctx.beginPath();
-                ctx.moveTo(300, 105);
-                ctx.lineTo(350, 155);
+                ctx.moveTo(310, 105);
+                ctx.lineTo(360, 155);
                 ctx.closePath();
                 ctx.stroke();
 
                 ctx.beginPath();
-                ctx.moveTo(350, 141);
-                ctx.lineTo(300, 190);
+                ctx.moveTo(360, 141);
+                ctx.lineTo(310, 190);
                 ctx.closePath();
                 ctx.stroke();
 
@@ -93,7 +96,7 @@
                 ctx.closePath();
                 ctx.stroke();
 
-            })();
+            };
 
         </script>
 
