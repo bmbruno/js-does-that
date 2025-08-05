@@ -26,10 +26,11 @@
 
             <div class="card" style="overflow: auto;">
                 <h2>Demo: drawing primitives</h2>
-
                 <button type="button" onclick="drawLogo();">Run Demo</button>
-                <p>asdfasdf sdaf sdfasd asfd</p>
 
+                <h2>Demo: animate</h2>
+                <button type="button" onclick="animate();">Run Demo</button>
+                
                 <div style="text-align: center;">
                     <canvas id="CanvasDemo" width="400px" height="300px" style="border: 1px solid #000; border-radius: 4px; margin-top: 1em;"></canvas>
                 </div>
@@ -42,7 +43,9 @@
 
             let drawLogo = () => {
 
-                // Demo 1: 
+                //
+                // Demo 1: draw a logo with primitives
+                //
 
                 let canvas = document.getElementById("CanvasDemo");
                 let ctx = canvas.getContext("2d");
@@ -97,6 +100,19 @@
                 ctx.stroke();
 
             };
+
+            let animate = () => {
+
+                //
+                // Demo 2: interactivity and animation
+                //
+
+                let canvas = document.getElementById("CanvasDemo");
+                let ctx = canvas.getContext("2d");
+
+                CanvasGame.run(canvas, ctx);
+
+            }
 
         </script>
 
