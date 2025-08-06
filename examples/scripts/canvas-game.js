@@ -3,7 +3,10 @@ let CanvasGame = {
     canvas: null,
     ctx: null,
 
+    active: true,
     score: 0,
+    canvasWidth: 400,
+    canvasHeight: 300,
 
     run: (canvas, ctx) => {
 
@@ -14,7 +17,16 @@ let CanvasGame = {
         // TODO: start game / animation
         let test = new CanvasGame.Target();
         test.init();
-        test.draw(ctx);
+
+        while (CanvasGame.active) {
+
+            // Clear canvas
+            ctx.clearRect(0, 0, CanvasGame.canvasHeight, CanvasGame.canvasWidth);
+
+            test.update();
+            test.draw(ctx);
+
+        }
 
     },
 
@@ -36,7 +48,7 @@ let CanvasGame = {
             this.posX = (Math.floor(Math.random() * (400 - this.size)) + 1);
 
             // Start randomly somewhere on the width of the screen
-            this.posY = 64;
+            this.posY = 0;
 
             // Different color for each square
             this.color = `rgb(${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))})`;
@@ -52,7 +64,12 @@ let CanvasGame = {
 
         update () {
 
+            this.posY += 0.05;
 
+            // Reached bottom of screen; game over
+            if (this.posY >= CanvasGame.canvasHeight) {
+                CanvasGame.active = false;
+            }
 
         }
 
