@@ -29,7 +29,7 @@
                 <button type="button" onclick="drawLogo();">Run Demo</button>
 
                 <h2>Demo: animate</h2>
-                <button type="button" onclick="animate();">Run Demo</button>
+                <button type="button" onclick="startGame();">Run Demo</button>
                 
                 <div style="text-align: center;">
                     <canvas id="CanvasDemo" width="400px" height="300px" style="border: 1px solid #000; border-radius: 4px; margin-top: 1em;"></canvas>
@@ -39,6 +39,8 @@
 
         </div>
         
+        <script src="scripts/canvas-game.js" type="text/javascript"></script>
+
         <script type="text/javascript"> 
 
             let drawLogo = () => {
@@ -101,7 +103,7 @@
 
             };
 
-            let animate = () => {
+            let startGame = () => {
 
                 //
                 // Demo 2: interactivity and animation
