@@ -29,8 +29,10 @@
                 <button type="button" onclick="requestPermission();">Request permission</button>
                 <p>Prompts the user to grant/deny permission for notifications.</p>
 
-                <button type="button" onclick="sendNotification();">Send permission</button>
-                <p></p>
+                <h2>Demo: send a native notification</h2>
+
+                <button type="button" onclick="sendNotification();">Send notification</button>
+                <p>Send a notification to the user's device. This requires a secure (HTTPS) connection (won't work locally from a file).</p>
 
 
                 <div id="Console" class="output code"></div>
@@ -52,6 +54,8 @@
             };
 
             let sendNotification = async () => {
+
+                // NOTE: this will only work in a secure (HTTPS) context
 
                 Demo.clear();
 
