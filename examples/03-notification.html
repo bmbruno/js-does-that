@@ -20,14 +20,18 @@
                 <p>Send browser- and device-native notifications from a website or webapp.</p>
 
                 <h2>When and why should you use the <span class="mono">Notifications API</span>?</h2>
-                <p>Notifications inform users of updates from your website - whether informational or transactional. Note that notifications require explicit opt-in from major browsers.</p>
+                <p>Notifications inform users of updates from your website - whether informational or transactional. Note that notifications require explicit opt-in from the user; a user is more likely to grant permission when they understand the value of why you want to send notifications.</p>
             </div>
 
             <div class="card">
                 <h2>Demo: notification permission</h2>
 
                 <button type="button" onclick="requestPermission();">Request permission</button>
-                <p>ABCDEFGHIJK</p>
+                <p>Prompts the user to grant/deny permission for notifications.</p>
+
+                <button type="button" onclick="sendNotification();">Send permission</button>
+                <p></p>
+
 
                 <div id="Console" class="output code"></div>
 
@@ -35,17 +39,37 @@
 
         </div>
         
-        <script type="text/javascript"> 
+        <script type="text/javascript">
 
             let requestPermission = async () => {
 
                 Demo.clear();
-                
-                Demo.log("Requested notification permission...")
+                Demo.log("Requested notification permission...");
+
                 let result = await Notification.requestPermission();
                 Demo.log(`Permission: ${result}`);
 
-            }
+            };
+
+            let sendNotification = async () => {
+
+                Demo.clear();
+
+                let result = await Notification.requestPermission();
+
+                if (result === "granted") {
+
+                    let notification = new Notification("Hello, World!");
+
+                    Demo.log("Notification sent!");
+
+                } else {
+
+                    Demo.log("User has denied notification permissions.");
+
+                }
+
+            };
 
         </script>
 
