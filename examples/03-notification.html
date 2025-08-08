@@ -24,9 +24,9 @@
             </div>
 
             <div class="card">
-                <h2>Demo: FeatureA</h2>
+                <h2>Demo: notification permission</h2>
 
-                <button type="button" onclick="">Run Demo</button>
+                <button type="button" onclick="requestPermission();">Request permission</button>
                 <p>ABCDEFGHIJK</p>
 
                 <div id="Console" class="output code"></div>
@@ -37,12 +37,15 @@
         
         <script type="text/javascript"> 
 
-            (function() {
+            let requestPermission = async () => {
 
                 Demo.clear();
-                Demo.log("Console", "123");
+                
+                Demo.log("Requested notification permission...")
+                let result = await Notification.requestPermission();
+                Demo.log(`Permission: ${result}`);
 
-            })();
+            }
 
         </script>
 
