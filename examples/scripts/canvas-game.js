@@ -1,32 +1,67 @@
-let CanvasGame = {
+/*
+
+// Game loop
+    function gameLoop() {
+      update()
+      render()
+      requestAnimationFrame(gameLoop)
+    }
+
+    // Start game
+    gameLoop()
+
+    */
+
+let Game = {
 
     canvas: null,
     ctx: null,
-
-    active: true,
-    score: 0,
     canvasWidth: 400,
     canvasHeight: 300,
 
+    active: true,
+    score: 0,
+    targets: [],
+
     run: (canvas, ctx) => {
 
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.score = 0;
+        Game.canvas = canvas;
+        Game.ctx = ctx;
+
+        Game.active = true;
+        Game.score = 0;
 
         // TODO: start game / animation
-        let test = new CanvasGame.Target();
+        let test = new Game.Target();
         test.init();
+        Game.targets.push(test);
 
-        while (CanvasGame.active) {
+        Game.gameLoop();
+    },
 
-            // Clear canvas
-            ctx.clearRect(0, 0, CanvasGame.canvasHeight, CanvasGame.canvasWidth);
+    gameLoop: () => {
 
-            test.update();
-            test.draw(ctx);
+        Game.update();
+        Game.draw();
 
+        requestAnimationFrame(Game.gameLoop);
+
+    },
+
+    update: () => {
+
+        if (!Game.active) {
+            return;
         }
+
+        Game.targets.forEach((element) => element.update());
+
+    },
+
+    draw: () => {
+
+        Game.ctx.clearRect(0, 0, 400, 300);
+        Game.targets.forEach((element) => element.draw(Game.ctx));
 
     },
 
@@ -64,11 +99,11 @@ let CanvasGame = {
 
         update () {
 
-            this.posY += 0.05;
+            this.posY += 2;
 
             // Reached bottom of screen; game over
-            if (this.posY >= CanvasGame.canvasHeight) {
-                CanvasGame.active = false;
+            if ((this.posY + this.size) >= Game.canvasHeight) {
+                Game.active = false;
             }
 
         }
