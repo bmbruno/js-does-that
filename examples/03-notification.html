@@ -34,7 +34,6 @@
                 <button type="button" onclick="sendNotification();">Send notification</button>
                 <p>Send a notification to the user's device. This requires a secure (HTTPS) connection (won't work locally from a file).</p>
 
-
                 <div id="Console" class="output code"></div>
 
             </div>
@@ -59,11 +58,22 @@
 
                 Demo.clear();
 
+                // Get permission to send notifications
                 let result = await Notification.requestPermission();
 
                 if (result === "granted") {
 
-                    let notification = new Notification("Hello, World!");
+                    // Set up notification options
+                    let options = {
+
+                        body: "This is your reminder to drink lots of water. Stay hydrated!",
+                        img: "/content/notification-image.png",
+                        icon: "/content/notification-icon.png"
+
+                    };
+
+                    // Create a notification
+                    let notification = new Notification("Time to drink!", options);
 
                     Demo.log("Notification sent!");
 
