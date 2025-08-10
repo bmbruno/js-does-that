@@ -32,7 +32,7 @@ strong { font-weight: bold; }
 
 /* THEME */
 
-body { font-family: 'Arial', sans-serif; font-size: 1em; color: #000; background-color: rgb(207, 207, 207); background: linear-gradient(0deg,rgba(0, 194, 145, 1) 0%, rgba(194, 255, 197, 1) 100%); }
+body { font-family: 'Arial', sans-serif; font-size: 1em; color: #000; background-color: rgb(207, 207, 207); background: radial-gradient(circle,rgba(238, 174, 174, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(204, 204, 204, 1) 100%); }
 h1 { font-size: 2em; font-weight: bold; margin-bottom: 0.5em;  }
 h2 { font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;  }
 em { font-style: italic; }
@@ -42,13 +42,13 @@ span.code { background-color: #e4e4e4; padding: 4px 8px; border-radius: 4px; }
 
 header, .content { max-width: 700px; margin: 0 auto; }
 header { margin: 2em auto 0 auto; text-align: center; }
-.content { background-color: rgba(255, 255, 255, 0.5); margin: 2em auto; padding: 2em; border-radius: 16px; box-shadow: 0 12px 32px rgb(0, 0, 0, 0.5); max-width: 95%; }
+.content { margin: 2em auto; padding: 2em;  max-width: 95%; }
 
-.card { margin: 0 0 1em 0; background-color: #FFF; box-shadow: 1px 1px 1px rgba(0,0,0,0.5); padding: 1.5em; border-radius: 8px; }
+.card { margin: 0 0 2em 0; background-color: #FFF; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2); padding: 1.5em; border-radius: 8px; }
 .card:last-of-type { margin-bottom: 0; }
-.card button { padding: 0.5em 2em; margin-bottom: 1em; cursor: pointer; }
-.card button:hover { box-shadow: 1px 1px 1px #454545; }
-.card button:active { position: relative; top: 1; left: 1; box-shadow: none; }
+.card button { padding: 1em 2em; margin-bottom: 1em; cursor: pointer; border: none; background-color: #2995f4; color: #FFF; text-shadow: 1px 1px 1px #000; border-radius: 8px; font-weight: bold; }
+.card button:hover { box-shadow: 0 4px 6px #7d7d7d; background-color: #1767ad; }
+.card button:active { position: relative; top: 2; box-shadow: 0 2px 4px #7d7d7d; }
 .card p { margin: 0 0 1em 0; }
 .card p:last-of-type { margin: 0 0 0 0; }
 .card ul { margin: 1em 0 0 0; }
