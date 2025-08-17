@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>JavaScript Does THAT!? Examples</title>
+        <link href="../base/main.css" type="text/css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="../base/demo.js"></script>
+        <script type="text/javascript" src="canvas.js"></script>
+        <script type="text/javascript" src="canvas-game.js"></script>
+    </head>
+
+    <body>
+        
+        <header>
+            <h1>Canvas</h1>
+            <p><a href="../../index.html">Return to Main Menu</a></p>
+        </header>
+
+        <div class="content">
+
+            <div class="card">
+                <h2>What is <span class="mono">canvas</span>?</h2>
+                <p>The Canvas API and associated DOM elements provides primitive 2D and 3D drawing capabilities.</p>
+
+                <h2>When and why should you use <span class="mono">canvas</span>?</h2>
+                <p>The Canvas API is useful for drawing and animating complex graphics in a browser with a relatively simple set of APIs. Canvas is great for drawing complex charts, graphs, shapes, UIs, and animations, including JS-based games.</p>
+                <p>This contrasts with the more complex WebGL API, which provides hardware accelerated graphics rendering at the expense of implementation simplicity.</p>
+            </div>
+
+            <div class="card" style="overflow: auto;">
+                <h2>Demo: drawing primitives</h2>
+                <button type="button" onclick="Demo.Canvas.drawLogo();">Draw Logo</button>
+
+                <h2>Demo: animate (TODO)</h2>
+                <button type="button" onclick="Demo.CanvasGame.start();">Start Animation</button>
+                
+                <div style="text-align: center;">
+                    <canvas id="CanvasDemo" width="400px" height="300px" style="border: 1px solid #000; border-radius: 4px; margin-top: 1em;"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

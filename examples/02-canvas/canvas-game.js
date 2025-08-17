@@ -12,7 +12,7 @@
 
     */
 
-let Game = {
+let CanvasgGame = {
 
     canvas: null,
     ctx: null,
