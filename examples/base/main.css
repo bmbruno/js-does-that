@@ -32,7 +32,7 @@ strong { font-weight: bold; }
 
 /* THEME */
 
-body { font-family: 'Arial', sans-serif; font-size: 1em; color: #000; background-color: rgb(207, 207, 207); background: radial-gradient(circle,rgba(238, 174, 174, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(204, 204, 204, 1) 100%); }
+body { font-family: 'Arial', sans-serif; font-size: 1em; color: #000; background-color: rgb(207, 207, 207); background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgb(159, 159, 159) 100%); }
 h1 { font-size: 2em; font-weight: bold; margin-bottom: 0.5em;  }
 h2 { font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;  }
 em { font-style: italic; }
