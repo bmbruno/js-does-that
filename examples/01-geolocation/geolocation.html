@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>JavaScript Does THAT!? Examples</title>
+        <link href="../base/main.css" type="text/css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="../base/demo.js"></script>
+        <script type="text/javascript" src="geolocation.js"></script>
+    </head>
+
+    <body>
+        
+        <header>
+            <h1>Geolocation</h1>
+            <p><a href="../../index.html">Return to Main Menu</a></p>
+        </header>
+
+        <div class="content">
+
+            <div class="card">
+
+                <h2>What is <span class="mono">geolocation</span>?</h2>
+                <p>Gets the current device's latitude/longitude coordinates. Also allows for watching a device's location in realtime.</p>
+
+                <h2>Why should you use <span class="mono">geolocation</span>?</h2>
+                <p>To get hyper-accurate location information; useful for mapping, searching, and certain types of gaming.</p>
+
+            </div>
+
+            <div class="card">
+
+                <h2>Demo: get a device's location</h2>
+
+                <button type="button" onclick="Demo.Geolocation.getLocation();">Low Accuracy</button>
+                <p>Attempts to get a device's location with normal accuracy.</p>
+
+                <button type="button" onclick="Demo.Geolocation.getLocationAccurate();">High Accuracy</button>
+                <p>Attempts to get a device's location with high accuracy. This may trigger the GPS module on a user's device and use considerable resources.</p>
+
+                <h2>Demo: watch a device's location in realtime</h2>
+
+                <button type="button" onclick="Demo.Geolocation.watchLocation();">Watch Location</button>
+                <button type="button" onclick="Demo.Geolocation.stopWatching();">Stop Watching</button>
+                <p>Calls the 'success' function every time the device's location changes.</p>
+
+                <div id="Console" class="output code"></div>
+
+            </div>
+
+        </div>
+
+    </body>
+</html>
