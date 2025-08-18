@@ -2,17 +2,17 @@ window.Demo = {
 
     log: (message) => {
 
-        let console = document.getElementById("Console");
-        if (console)
-            console.innerHTML += `${message}<br/>`;
+        let outputConsole = document.getElementById("Console");
+        if (outputConsole)
+            outputConsole.innerHTML += `${message}<br/>`;
 
     },
 
     clear: () => {
 
-        let console = document.getElementById("Console");
-        if (console)
-            console.innerHTML = "";
+        let outputConsole = document.getElementById("Console");
+        if (outputConsole)
+            outputConsole.innerHTML = "";
     }
 
 };

@@ -54,7 +54,7 @@ header { margin: 2em auto 0 auto; text-align: center; }
 .card ul { margin: 1em 0 0 0; }
 .card li { margin-left: 2em; list-style-type: disc; margin-bottom: 1em; line-height: 1.25em; }
 .card li:last-of-type { margin-bottom: 0; }
-.card .output { background-color: rgb(216, 216, 216); margin: 1em 0 0 0; padding: 1.5em 1em; border-radius: 4px; }
+.card .output { background-color: #e9e9e9; padding: 1.5em 1em; border-radius: 4px; box-shadow: inset 1px 1px 4px #717171; }
 .card .output.code { font-family: monospace; font-size: 1.25em;}
 
 @media (min-width: 48em)
