@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>JavaScript Does THAT!? Examples</title>
+        <link href="../base/main.css" type="text/css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="../base/demo.js"></script>
+        <script type="text/javascript" src="notifications.js"></script>
+    </head>
+
+    <body>
+        
+        <header>
+            <h1>Notifications API</h1>
+            <p><a href="../../index.html">Return to Main Menu</a></p>
+        </header>
+
+        <div class="content">
+
+            <div class="card">
+                <h2>What is the <span class="mono">Notifications API</span>?</h2>
+                <p>Send browser- and device-native notifications from a website or webapp.</p>
+
+                <h2>When and why should you use the <span class="mono">Notifications API</span>?</h2>
+                <p>Notifications inform users of updates from your website - whether informational or transactional. Note that notifications require explicit opt-in from the user; a user is more likely to grant permission when they understand the value of why you want to send notifications.</p>
+            </div>
+
+            <div class="card">
+                
+                <h2>Demo: notification permission</h2>
+
+                <button type="button" onclick="Demo.Notifications.requestPermission();">Request permission</button>
+                <p>Prompts the user to grant/deny permission for notifications.</p>
+
+            </div>
+
+            <div class="card">
+                
+                <h2>Demo: send a native notification</h2>
+
+                <button type="button" onclick="Demo.Notifications.sendNotification();">Send notification</button>
+                <p>Send a notification to the user's device. This requires a secure (HTTPS) connection (won't work locally from a file).</p>
+
+            </div>
+
+            <div class="card">
+                <div id="Console" class="output code"></div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
