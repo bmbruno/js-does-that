@@ -31,8 +31,7 @@ Demo.Notifications = window.Demo.Notifications || {
             let options = {
 
                 body: "This is your reminder to drink lots of water. Stay hydrated!",
-                img: "/content/notification-image.png",
-                icon: "/content/notification-icon.png"
+                icon: "notification-icon.png"
 
             };
 
