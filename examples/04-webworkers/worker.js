@@ -2,9 +2,15 @@
 // Listens for a message from the main thread
 //
 
-onmessage = (eventData) => {
+onmessage = (event) => {
 
     console.log("worker.js: received a message!");
-    console.log(eventData);
+    console.log(event);
+    console.log(event.data);
 
 }
+
+//
+// Worker logic
+//
+

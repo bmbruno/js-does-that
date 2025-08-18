@@ -8,10 +8,17 @@ Demo.Webworkers = window.Demo.Webworkers || {
 
         let worker = new Worker("worker.js");
 
-        // Send a message to the 
+        // Send a message to the worker
         worker.postMessage("Hello, world!");
 
+        worker.onmessage = (event) => {
+            alert(event);
+        }
+
     }
+
+    // TODO: recieve a message from the worker
+
 
     //
     // Demo 2: do something intensive
