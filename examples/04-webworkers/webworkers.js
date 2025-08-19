@@ -27,24 +27,41 @@ Demo.Webworkers = window.Demo.Webworkers || {
 
     calculatePrimes: () => {
 
-        let primeLimit = document.getElementById("PrimeLimit").value;
+        Demo.clear();
 
+        let primeLimit = document.getElementById("PrimeLimit").value;
         if (primeLimit === "undefined" || primeLimit == "")
             return;
 
+        // Create new worker
         let worker = new Worker("primes.js");
 
-        Demo.clear();
+        // Send our data (prime limit) to the worker
         Demo.log("Calculating primes, please wait...");
-
         worker.postMessage(primeLimit);
 
+        // When the worker is ready, it'll send the result back here
         worker.onmessage = (event) => {
 
             Demo.log(`Found ${event.data.length} prime numbers.`);
 
         }
         
+    },
+
+    //
+    // Demo 3: sending a notifcation from a worker
+    //
+
+    sendNotification: () => {
+
+        Demo.clear();
+
+        let worker = new Worker("notification-demo.js");
+
+        worker.postMessage({ title: "NOTIFICATION TITLE", body: "AND BODY!" });
+
+
     }
 
 };
