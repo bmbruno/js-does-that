@@ -6,14 +6,17 @@ Demo.Webworkers = window.Demo.Webworkers || {
 
     create: () => {
 
-        let worker = new Worker("worker.js");
+        Demo.clear();
+        let message = "Hello, web worker!";
+        let worker = new Worker("worker.js?v=1");
 
         // Send a message to the worker
-        worker.postMessage("Hello, world!");
+        Demo.log(`Sending message: ${message}`);
+        worker.postMessage(message);
 
-        // Recieve a message from the server
+        // Recieve a message from the worker
         worker.onmessage = (event) => {
-            alert(event);
+            Demo.log(`Received message: ${event.data}`);
         }
 
     },
@@ -24,10 +27,24 @@ Demo.Webworkers = window.Demo.Webworkers || {
 
     calculatePrimes: () => {
 
+        let primeLimit = document.getElementById("PrimeLimit").value;
+
+        if (primeLimit === "undefined" || primeLimit == "")
+            return;
+
         let worker = new Worker("primes.js");
 
-        
+        Demo.clear();
+        Demo.log("Calculating primes, please wait...");
 
+        worker.postMessage(primeLimit);
+
+        worker.onmessage = (event) => {
+
+            Demo.log(`Found ${event.data.length} prime numbers.`);
+
+        }
+        
     }
 
 };

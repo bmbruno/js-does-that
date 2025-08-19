@@ -1,15 +1,18 @@
 // TODO: calc some primes
 
-onmessage = (event) => {
+self.onmessage = (event) => {
 
-    console.log("worker.js: received a message!");
-    console.log(event);
-    console.log(event.data);
+    console.log("primes.js: received a message!");
+    console.log(`Starting prime calculation up to: ${event.data}`);
+
+    primes = findPrimesUpTo(parseInt(event.data, 10));
+
+    self.postMessage(primes);
 
 }
 
 //
-// Worker logic
+// Worker logic (courtesy of Gemini)
 //
 
 function findPrimesUpTo(n) {
@@ -42,6 +45,8 @@ function findPrimesUpTo(n) {
   return primes;
 }
 
+/*
+
 console.log("Starting prime number calculation...");
 
 const limit = 1000000;
@@ -54,3 +59,5 @@ console.log(`Found ${primeNumbers.length} primes up to ${limit}.`);
 console.log(`Calculation took ${ (endTime - startTime).toFixed(2) } milliseconds.`);
 console.log("The first 10 prime numbers are:", primeNumbers.slice(0, 10));
 console.log("The last 10 prime numbers are:", primeNumbers.slice(-10));
+
+*/
