@@ -11,17 +11,23 @@ Demo.Webworkers = window.Demo.Webworkers || {
         // Send a message to the worker
         worker.postMessage("Hello, world!");
 
+        // Recieve a message from the server
         worker.onmessage = (event) => {
             alert(event);
         }
 
+    },
+
+    //
+    // Demo 2: use a worker to calculate prime numbers; report back when done
+    //
+
+    calculatePrimes: () => {
+
+        let worker = new Worker("primes.js");
+
+        
+
     }
-
-    // TODO: recieve a message from the worker
-
-
-    //
-    // Demo 2: do something intensive
-    //
 
 };
