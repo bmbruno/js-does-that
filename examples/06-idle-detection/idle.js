@@ -1,13 +1,16 @@
-Demo.Webworkers = window.Demo.Webworkers || {
+Demo.Idle = window.Demo.Idle || {
 
     //
     // Demo 1: request permission
     // 
 
-    requestPermission: () => {
+    requestPermission: async () => {
 
-        
+        Demo.clear();
 
+        let permission = await IdleDetector.requestPermission();
+
+        Demo.log(`Idle detection permission: ${permission}`);
     }
 
 };
