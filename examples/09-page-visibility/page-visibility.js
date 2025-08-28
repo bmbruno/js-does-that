@@ -16,7 +16,7 @@ Demo.PageVisibility = window.Demo.PageVisibility || {
             // Update document title
             document.title = (document.hidden) ? "I'm hidden for now..." : "Peek-a-boo!" ;
 
-            // TODO: MAYBE: set up a notification to be sent when page is 
+            // TODO: MAYBE: set up a notification to be sent when page is hidden
 
             // TODO: MAYBE: change colors of page/design while tab is hidden
 
