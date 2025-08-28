@@ -9,7 +9,7 @@ Demo.Geolocation = window.Demo.Geolocation || {
         Demo.clear();
         Demo.log(`Latitude: ${pos.coords.latitude}`);
         Demo.log(`Longitude: ${pos.coords.longitude}`);
-        Demo.log(`Accuracy: ${pos.accuracy}`);
+        Demo.log(`Accuracy: ${pos.coords.accuracy.toFixed(1)}`);
 
     },
 
@@ -40,7 +40,7 @@ Demo.Geolocation = window.Demo.Geolocation || {
         options = {
 
             // Max age to allow cached location; 0 = do not use any cached locations
-            maximumAge: 5000,
+            maximumAge: 0,
 
             // Millisons before the location request times out (errors)
             timeout: 10000, 
@@ -67,7 +67,7 @@ Demo.Geolocation = window.Demo.Geolocation || {
             Demo.log("Watching location...");
             Demo.log(`Latitude: ${pos.coords.latitude}`);
             Demo.log(`Longitude: ${pos.coords.longitude}`);
-            Demo.log(`Accuracy: ${pos.accuracy}`);
+            Demo.log(`Accuracy: ${pos.coords.accuracy.toFixed(1)}`);
 
         };
 
