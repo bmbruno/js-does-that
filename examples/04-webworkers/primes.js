@@ -1,5 +1,3 @@
-// TODO: calc some primes
-
 self.onmessage = (event) => {
 
     console.log("primes.js: received a message!");
@@ -44,20 +42,3 @@ function findPrimesUpTo(n) {
 
   return primes;
 }
-
-/*
-
-console.log("Starting prime number calculation...");
-
-const limit = 1000000;
-
-const startTime = performance.now();
-const primeNumbers = findPrimesUpTo(limit);
-const endTime = performance.now();
-
-console.log(`Found ${primeNumbers.length} primes up to ${limit}.`);
-console.log(`Calculation took ${ (endTime - startTime).toFixed(2) } milliseconds.`);
-console.log("The first 10 prime numbers are:", primeNumbers.slice(0, 10));
-console.log("The last 10 prime numbers are:", primeNumbers.slice(-10));
-
-*/
