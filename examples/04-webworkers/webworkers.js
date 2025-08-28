@@ -56,9 +56,9 @@ Demo.Webworkers = window.Demo.Webworkers || {
     sendNotification: () => {
 
         Demo.clear();
+        Demo.log("Starting a web worker. You'll get a notification soon...");
 
         let worker = new Worker("notification-demo.js");
-
         worker.postMessage({ title: "Hi from a Web Worker!", body: "Web workers are a very useful way to send notifications as background processes need to send updates." });
         
     }
