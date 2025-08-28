@@ -40,7 +40,10 @@ Demo.Geolocation = window.Demo.Geolocation || {
         options = {
 
             // Max age to allow cached location; 0 = do not use any cached locations
-            maximumAge: 0,
+            maximumAge: 5000,
+
+            // Millisons before the location request times out (errors)
+            timeout: 10000, 
             
             // Try using highly-accurate GPS information, if allowed by the user
             enableHighAccuracy: true
