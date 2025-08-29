@@ -20,10 +20,11 @@
             <div class="card">
 
                 <h2>What is the <span class="mono">Vibration API</span>?</h2>
-                <p></p>
+                <p>Vibrate a device using timed patterns. You cannot control the strength of the vibration. Do not overuse vibrations to annoy users or use excessive amounts of energy.</p>
+                <p>Extra-special note: Safari on iOS (and thus all iOS browsers) do not support the Vibration API.</p>
 
                 <h2>Why should you use the <span class="mono">Vibration API</span>?</h2>
-                <p></p>
+                <p>Provide haptic feedback when the user interacts with certain elements or interactivity in games.</p>
 
             </div>
 
@@ -32,7 +33,7 @@
                 <h2>Demo: short vibration</h2>
 
                 <button type="button" onclick="Demo.Vibration.vibrate();">Vibrate</button>
-                <p>DESCRIPTION</p>
+                <p>Creates a short vibration of 500ms.</p>
                 
             </div>
 
@@ -41,7 +42,7 @@
                 <h2>Demo: vibrate with a pattern</h2>
 
                 <button type="button" onclick="Demo.Vibration.vibratePattern();">Vibrate with pattern</button>
-                <p>DESCRIPTION</p>
+                <p>Creates a pattern of on-off vibrations of various lengths, up to 1000ms.</p>
                 
             </div>
 
