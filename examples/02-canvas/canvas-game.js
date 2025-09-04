@@ -122,6 +122,7 @@ let Game = {
             this.posY = 0;
             this.color = "black";
             this.active = true;
+            this.speed = Math.floor(Math.random() * 2) + 1;
 
             // Set square target to random size up to 64px
             this.size = Math.floor(Math.random() * 64) + 32;
@@ -152,7 +153,7 @@ let Game = {
             if (!this.active)
                 return;
 
-            this.posY += 1;
+            this.posY += this.speed;
 
             // Reached bottom of screen; game over
             if ((this.posY + this.size) >= Game.canvasHeight) {
