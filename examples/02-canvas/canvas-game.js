@@ -92,7 +92,16 @@ let Game = {
         }
 
         // TODO: Remove any inactive targets from array
+        Game.targets.filter((element, index, arr) => {
+ 
+            if (!element.active) {
+                arr.splice(index, 1);
+                return true;
+            }
 
+            return false;
+
+        });
 
         // Update all targets
         Game.targets.forEach((element) => element.update(delta));
@@ -101,7 +110,7 @@ let Game = {
 
     draw: () => {
 
-        Game.ctx.clearRect(0, 0, 400, 300);
+        Game.ctx.clearRect(0, 0, Game.canvasWidth, Game.canvasHeight);
         Game.targets.forEach((element) => element.draw(Game.ctx));
 
     },
