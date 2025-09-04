@@ -40,6 +40,8 @@ let Game = {
         Game.timeSinceLastSpawn = (Game.timeBetweenSpawns * -1);
 
         Game.gameLoop(0);
+
+        Game.canvas.addEventListener('mousedown', (e) => Game.handleMouseClick(e) );
     },
 
     gameLoop: (timestamp) => {
@@ -81,6 +83,9 @@ let Game = {
 
         }
 
+        // TODO: Remove any inactive targets from array
+
+
         // Update all targets
         Game.targets.forEach((element) => element.update(delta));
 
@@ -93,6 +98,14 @@ let Game = {
 
     },
 
+    handleMouseClick: (e) => {
+
+        console.log(`MouseX: ${e.offsetX}, MouseY: ${e.offsetY}`);
+
+        Game.targets.forEach((target) => target.handleClick(e.offsetX, e.offsetY));
+
+    },
+
     Target: class { 
 
         constructor () {
@@ -100,6 +113,7 @@ let Game = {
             this.posX = 0;
             this.posY = 0;
             this.color = "black";
+            this.active = true;
 
             // Set square target to random size up to 64px
             this.size = Math.floor(Math.random() * 64) + 16;
@@ -117,12 +131,18 @@ let Game = {
 
         draw (ctx) {
 
+            if (!this.active)
+                return;
+
             ctx.fillStyle = this.color;
             ctx.fillRect(this.posX, this.posY, this.size, this.size);
 
         }
 
         update (delta) {
+
+            if (!this.active)
+                return;
 
             this.posY += 1;
 
@@ -131,7 +151,18 @@ let Game = {
                 Game.active = false;
             }
 
-            // Handle mouse input
+        }
+
+        handleClick (mouseX, mouseY) {
+
+            if (this.posX <= mouseX &&
+                this.posY <= mouseY &&
+                (this.posX + this.size) >= mouseX &&
+                (this.posY + this.size) >= mouseY
+            ) {
+               // HIT!
+               this.active = false;
+            }
 
         }
 
