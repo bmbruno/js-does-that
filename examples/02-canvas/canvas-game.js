@@ -24,9 +24,9 @@ let Game = {
     targets: [],
     timeBetweenSpawns: 1500,
     timeSinceLastSpawn: 0,
+    difficultyTime: 0,
 
     previousTime: 0,
-
 
     run: (canvas, ctx) => {
 
@@ -73,6 +73,14 @@ let Game = {
 
     update: (delta) => {
 
+        Game.difficultyTime += delta;
+
+        // Increase the spawn rate every so often
+        if (Game.difficultyTime > 5000) {
+            Game.timeBetweenSpawns -= 150;
+            Game.difficultyTime = 0;
+        }
+
         // Spawn new targets based on a cooldown
         Game.timeSinceLastSpawn += delta;
 
@@ -116,7 +124,7 @@ let Game = {
             this.active = true;
 
             // Set square target to random size up to 64px
-            this.size = Math.floor(Math.random() * 64) + 16;
+            this.size = Math.floor(Math.random() * 64) + 32;
 
             // Start randomly somewhere on the width of the screen
             this.posX = (Math.floor(Math.random() * (400 - this.size)) + 1);
@@ -162,6 +170,7 @@ let Game = {
             ) {
                // HIT!
                this.active = false;
+               Game.score += 1;
             }
 
         }
