@@ -59,6 +59,15 @@ Demo.Canvas = window.Demo.Canvas || {
         ctx.closePath();
         ctx.stroke();
 
+    },
+
+    startGame: () => {
+
+        let canvas = document.getElementById("CanvasDemo");
+        let ctx = canvas.getContext("2d");
+
+        Game.run(canvas, ctx);
+
     }
 
 }

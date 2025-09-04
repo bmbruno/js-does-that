@@ -12,7 +12,7 @@
 
     */
 
-let CanvasgGame = {
+let Game = {
 
     canvas: null,
     ctx: null,
@@ -23,6 +23,8 @@ let CanvasgGame = {
     score: 0,
     targets: [],
 
+    previousTime: 0,
+
     run: (canvas, ctx) => {
 
         Game.canvas = canvas;
@@ -31,30 +33,34 @@ let CanvasgGame = {
         Game.active = true;
         Game.score = 0;
 
-        // TODO: start game / animation
-        let test = new Game.Target();
-        test.init();
-        Game.targets.push(test);
+        // DEBUG
+        let target = new Game.Target();
+        Game.targets.push(target);
 
-        Game.gameLoop();
+        Game.gameLoop(0);
     },
 
-    gameLoop: () => {
+    gameLoop: (timestamp) => {
 
-        Game.update();
+        if (!Game.active) {
+            alert("Game over!");
+            return;
+        }
+
+        // Calculate elapsed time since last frame was drawn
+        let delta = timestamp - Game.previousTime;
+        Game.previousTime = timestamp;
+
+        Game.update(delta);
         Game.draw();
 
         requestAnimationFrame(Game.gameLoop);
 
     },
 
-    update: () => {
+    update: (delta) => {
 
-        if (!Game.active) {
-            return;
-        }
-
-        Game.targets.forEach((element) => element.update());
+        Game.targets.forEach((element) => element.update(delta));
 
     },
 
@@ -72,6 +78,19 @@ let CanvasgGame = {
             this.posX = 0;
             this.posY = 0;
             this.color = "black";
+
+            // Set square target to random size up to 64px
+            this.size = Math.floor(Math.random() * 64) + 8;
+
+            // Start off the top of the screen
+            this.posX = (Math.floor(Math.random() * (400 - this.size)) + 1);
+
+            // Start randomly somewhere on the width of the screen
+            this.posY = 0;
+
+            // Different color for each square
+            this.color = `rgb(${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))})`;
+
         }
 
         init () {
@@ -97,7 +116,7 @@ let CanvasgGame = {
 
         }
 
-        update () {
+        update (delta) {
 
             this.posY += 2;
 
