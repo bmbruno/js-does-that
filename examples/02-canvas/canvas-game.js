@@ -22,8 +22,11 @@ let Game = {
     active: true,
     score: 0,
     targets: [],
+    timeBetweenSpawns: 1500,
+    timeSinceLastSpawn: 0,
 
     previousTime: 0,
+
 
     run: (canvas, ctx) => {
 
@@ -33,9 +36,8 @@ let Game = {
         Game.active = true;
         Game.score = 0;
 
-        // DEBUG
-        let target = new Game.Target();
-        Game.targets.push(target);
+        // Delay first spawn so player has time to get oriented
+        Game.timeSinceLastSpawn = (Game.timeBetweenSpawns * -1);
 
         Game.gameLoop(0);
     },
@@ -43,7 +45,10 @@ let Game = {
     gameLoop: (timestamp) => {
 
         if (!Game.active) {
+
+            // TODO: move this to canvas text in gameover() function
             alert("Game over!");
+            Game.gameover();
             return;
         }
 
@@ -58,8 +63,25 @@ let Game = {
 
     },
 
+    gameover: () => {
+
+        Game.targets = [];
+
+    },
+
     update: (delta) => {
 
+        // Spawn new targets based on a cooldown
+        Game.timeSinceLastSpawn += delta;
+
+        if (Game.timeSinceLastSpawn > Game.timeBetweenSpawns) {
+
+            Game.timeSinceLastSpawn = 0;
+            Game.targets.push(new Game.Target());
+
+        }
+
+        // Update all targets
         Game.targets.forEach((element) => element.update(delta));
 
     },
@@ -80,28 +102,12 @@ let Game = {
             this.color = "black";
 
             // Set square target to random size up to 64px
-            this.size = Math.floor(Math.random() * 64) + 8;
-
-            // Start off the top of the screen
-            this.posX = (Math.floor(Math.random() * (400 - this.size)) + 1);
+            this.size = Math.floor(Math.random() * 64) + 16;
 
             // Start randomly somewhere on the width of the screen
-            this.posY = 0;
-
-            // Different color for each square
-            this.color = `rgb(${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))})`;
-
-        }
-
-        init () {
-
-            // Set square target to random size up to 64px
-            this.size = Math.floor(Math.random() * 64) + 8;
-
-            // Start off the top of the screen
             this.posX = (Math.floor(Math.random() * (400 - this.size)) + 1);
-
-            // Start randomly somewhere on the width of the screen
+            
+            // Start at the top of the screen
             this.posY = 0;
 
             // Different color for each square
@@ -118,12 +124,14 @@ let Game = {
 
         update (delta) {
 
-            this.posY += 2;
+            this.posY += 1;
 
             // Reached bottom of screen; game over
             if ((this.posY + this.size) >= Game.canvasHeight) {
                 Game.active = false;
             }
+
+            // Handle mouse input
 
         }
 
