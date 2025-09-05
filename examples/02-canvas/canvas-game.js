@@ -49,7 +49,6 @@ let Game = {
         if (!Game.active) {
 
             // TODO: move this to canvas text in gameover() function
-            alert("Game over!");
             Game.gameover();
             return;
         }
@@ -66,6 +65,15 @@ let Game = {
     },
 
     gameover: () => {
+
+        console.log("Game over!");
+
+        // Draw text in center of screen (measureText function helps with this)
+        Game.ctx.fillStyle = "black";
+        Game.ctx.font = "36px sans-serif";
+        let text = "Game Over!";
+        let measure = Game.ctx.measureText(text);
+        Game.ctx.fillText(text, (Game.canvas.width / 2) - (measure.width / 2), 125);
 
         Game.targets = [];
 
