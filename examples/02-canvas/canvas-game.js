@@ -1,17 +1,3 @@
-/*
-
-// Game loop
-    function gameLoop() {
-      update()
-      render()
-      requestAnimationFrame(gameLoop)
-    }
-
-    // Start game
-    gameLoop()
-
-    */
-
 let Game = {
 
     canvas: null,
@@ -70,7 +56,7 @@ let Game = {
 
         // Draw text in center of screen (measureText function helps with this)
         Game.ctx.fillStyle = "black";
-        Game.ctx.font = "36px sans-serif";
+        Game.ctx.font = "52px sans-serif";
         let text = "Game Over!";
         let measure = Game.ctx.measureText(text);
         Game.ctx.fillText(text, (Game.canvas.width / 2) - (measure.width / 2), 125);
@@ -99,7 +85,7 @@ let Game = {
 
         }
 
-        // TODO: Remove any inactive targets from array
+        // Remove inactive targets from array
         Game.targets.filter((element, index, arr) => {
  
             if (!element.active) {
@@ -121,6 +107,11 @@ let Game = {
         Game.ctx.clearRect(0, 0, Game.canvasWidth, Game.canvasHeight);
         Game.targets.forEach((element) => element.draw(Game.ctx));
 
+        // Draw score
+        Game.ctx.font = "18px sans-serif";
+        Game.ctx.fillStyle = "black";
+        Game.ctx.fillText(`Score: ${Game.score}`, 5, 20);
+
     },
 
     handleMouseClick: (e) => {
@@ -139,7 +130,7 @@ let Game = {
             this.posY = 0;
             this.color = "black";
             this.active = true;
-            this.speed = Math.floor(Math.random() * 2) + 1;
+            this.speed = Math.floor(Math.random() * 4) + 1;
 
             // Set square target to random size up to 64px
             this.size = Math.floor(Math.random() * 64) + 32;
@@ -148,7 +139,7 @@ let Game = {
             this.posX = (Math.floor(Math.random() * (400 - this.size)) + 1);
             
             // Start at the top of the screen
-            this.posY = 0;
+            this.posY = this.size * -1;
 
             // Different color for each square
             this.color = `rgb(${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))}, ${(Math.floor(Math.random() * 225))})`;
