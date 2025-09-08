@@ -42,7 +42,7 @@ Demo.Idle = window.Demo.Idle || {
             Demo.log(`Change of idle status!`);
             Demo.log(`UserState: ${idleStatus.userState}`);
             Demo.log(`ScreenState: ${idleStatus.screenState}`);
-
+            
         });
 
     }

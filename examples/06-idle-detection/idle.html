@@ -20,10 +20,11 @@
             <div class="card">
 
                 <h2>What is the <span class="mono">Idle Detection API</span>?</h2>
-                <p></p>
+                <p>With user permission, this API will monitor the current user's session for activity (based on session inputs) and screen locked status.</p>
+                <p>A 'change' event fires off when a user's idle status is updated.</p>
 
                 <h2>Why should you use <span class="mono">Idle Detection API</span>?</h2>
-                <p></p>
+                <p>If a user interacts with a long-running application (i.e. chat) or high-performance application (i.e. game), a change in idle status can provide updates ("user away") or pause process ("game paused").</p>
 
             </div>
 
@@ -41,7 +42,7 @@
                 <h2>Demo: Monitor idle status</h2>
 
                 <button type="button" onclick="Demo.Idle.monitorIdle();">Monitor idle status</button>
-                <p></p>
+                <p>Monitors the user's idle status and updates the console output when status changes. There is a 60-second minimum wait between status changes.</p>
                 
             </div>
 
