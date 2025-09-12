@@ -1,4 +1,4 @@
-Demo.Inking = window.Demo.Inking || {
+Demo.Webworkers = window.Demo.Webworkers || {
 
     //
     // Demo 1: 
