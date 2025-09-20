@@ -4,21 +4,36 @@ Demo.Clipboard = window.Demo.Clipboard || {
     // Demo 1: copy to clipboard
     // 
 
-    copyToClipboard: () => {
+    copyToClipboard: async () => {
 
-        let contents = "";
+        try {
 
-        navigator.clipboard.write(contents);
+            let contents = document.getElementById("TextToCopy").value;
+            await navigator.clipboard.writeText(contents);
 
+        } catch (exc) {
+
+            Demo.log(`Copy error: ${exc}`);
+
+        }
     },
 
     //
     // Demo 2: paste from clipboard
     //
 
-    pasteFromClipboard: () => {
+    pasteFromClipboard: async () => {
 
-        let contents = navigator.clipboard.read();
+        try {
+
+            let contents = await navigator.clipboard.readText();
+            Demo.log(`Pasted text: ${contents}`);
+
+        } catch (exc) {
+
+            Demo.log(`Paste error: ${exc}`);
+
+        }
 
     }
 

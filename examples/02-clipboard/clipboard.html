@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <script type="text/javascript" src="../base/demo.js"></script>
-        <script type="text/javascript" src="XXXXXXXXXXXX.js"></script>
+        <script type="text/javascript" src="clipboard.js"></script>
     </head>
 
     <body>
@@ -28,11 +28,20 @@
             </div>
 
             <div class="card">
+                <h2>Permission Required?</h2>
+                <p>Yes, explicit user permission required when pasting.</p>
+
+                <h2>Supported Browsers</h2>
+                <p><a href="">Supported Browsers on MDN</a></p>
+            </div>
+
+            <div class="card">
 
                 <h2>Demo: copy content to the clipboard</h2>
 
-                <button type="button" onclick="">DEMO_ACTION</button>
-                <p>XXXX</p>
+                <button type="button" onclick="Demo.Clipboard.copyToClipboard()">Copy To Clipboard</button>
+                <p>Copy the following text to the clipboard:</p>
+                <p><input type="text" id="TextToCopy" value="These are the voyages of the starship Enterprise." style="width: 100%;" /></p>
                 
             </div>
 
@@ -40,8 +49,8 @@
 
                 <h2>Demo: paste content from the clipboard</h2>
 
-                <button type="button" onclick="">DEMO_ACTION</button>
-                <p>XXXX</p>
+                <button type="button" onclick="Demo.Clipboard.pasteFromClipboard()">Paste From Clipboard</button>
+                <p>Pastes whatever text is in the clipboard.</p>
                 
             </div>
 
