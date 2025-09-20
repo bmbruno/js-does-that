@@ -71,6 +71,7 @@ Demo.Geolocation = window.Demo.Geolocation || {
 
         };
 
+        // Start watching location; successWatch() will be called when location changes
         watchID = navigator.geolocation.watchPosition(successWatch, Demo.Geolocation.error);
 
     },
