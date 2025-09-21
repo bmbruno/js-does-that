@@ -38,8 +38,9 @@ h1 { font-size: 2em; font-weight: bold; margin-bottom: 0.5em;  }
 h2 { font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em;  }
 em { font-style: italic; }
 p { line-height: 1.5em; }
-span.mono { font-family: monospace; font-size: 1.25em; }
-span.code { background-color: #e4e4e4; padding: 4px 8px; border-radius: 4px; }
+span.mono { font-family: monospace; font-size: 1.15em; }
+span.code, code { background-color: #e4e4e4; padding: 4px 8px; border-radius: 4px; }
+code { font-family: monospace; }
 
 header, .content { max-width: 700px; margin: 0 auto; }
 header { margin: 2em auto 0 auto; text-align: center; }
