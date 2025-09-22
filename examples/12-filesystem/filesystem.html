@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>JavaScript Does THAT!? Examples</title>
+        <link href="../base/main.css" type="text/css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="../base/demo.js"></script>
+        <script type="text/javascript" src="filesystem.js"></script>
+    </head>
+
+    <body>
+        
+        <header>
+            <h1>File System API</h1>
+            <p><a href="../../index.html">Return to Main Menu</a></p>
+        </header>
+
+        <div class="content">
+
+            <div class="card">
+
+                <h2>What is the <span class="mono">File System API</span>?</h2>
+                <p>Provides access to read and write files on the local system.</p>
+                <p>NOTE: this contrasts with the <code>File API</code>, which works locally in JavaScript stricly on files provided by the user (via an <code>&lt;input&gt;</code> control, for example). Files written to disk are stored in a sandboxed area known as "origin private file system".</p>
+                <p>NOTE: the <code>File System Access API</code> provides direct access to the entire local file system with a different API that explicitly requires user permission.</p>
+
+                <h2>Why should you use the <span class="mono">File System API</span>?</h2>
+                <p>For web applications, access to local files can provide flexible options for storing content on a user's device for processing or interaction (for example, offline videos or other media).</p>
+
+            </div>
+
+            <div class="card">
+                <h2>Permission Required?</h2>
+                <p>Surprisingly, no.</p>
+
+                <h2>Supported Browsers</h2>
+                <p><a href="">Supported Browsers on MDN</a></p>
+            </div>
+
+            <div class="card">
+
+                <h2>Demo: extract file information</h2>
+
+                <button type="button" onclick="">DEMO_ACTION</button>
+                <p>Lets the user pick a local file, then analyzes it. Information is displayed in this app's console and written out to a file that the user can save on their local file system.</p>
+                
+            </div>
+
+            <div class="card">
+                <div id="Console" class="output code"></div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
