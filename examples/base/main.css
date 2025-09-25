@@ -39,7 +39,7 @@ h2 { font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em; }
 h2 a { text-decoration: none; }
 em { font-style: italic; }
 p { line-height: 1.5em; }
-span.mono { font-family: monospace; font-size: 1.15em; }
+span.mono { font-family: monospace; font-size: 1.15em; font-family: monospace; font-size: 1.15em; padding: 2px 8px; background-color: #eeeeee; border-radius: 8px; }
 span.code, code { background-color: #e4e4e4; padding: 4px 8px; border-radius: 4px; }
 code { font-family: monospace; }
 
