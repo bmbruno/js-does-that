@@ -1,0 +1,7 @@
+JSON
+https://www.brandonbruno.com/sites/code/jsdoesthat/demo/trails.js
+
+FILES
+https://www.brandonbruno.com/sites/code/jsdoesthat/demo/sunrise.jpg
+https://www.brandonbruno.com/sites/code/jsdoesthat/demo/nightsky.jpg
+https://www.brandonbruno.com/sites/code/jsdoesthat/demo/sunset.jpg
