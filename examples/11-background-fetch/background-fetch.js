@@ -14,6 +14,7 @@ Demo.BackgroundFetch = window.Demo.BackgroundFetch || {
 
     downloadFiles: async () => {
 
+        // Register server worker to handle background fetch
         let worker = await navigator.serviceWorker.register("download-serverworker");
 
         try {
