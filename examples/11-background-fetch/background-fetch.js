@@ -15,23 +15,29 @@ Demo.BackgroundFetch = window.Demo.BackgroundFetch || {
     downloadFiles: async () => {
 
         // Register server worker to handle background fetch
-        let worker = await navigator.serviceWorker.register("download-serverworker");
+        let worker = await navigator.serviceWorker.register("download-serviceworker.js");
+
+        Demo.log("Service worker has been registered.");
 
         try {
 
-            worker.backgroundFetch.fetch('image-downloads', Demo.BackgroundFetch.urls, {
-            
-                title: "Downloading images...",
-                icons: [{ 
-                    sizes: 'XxX',
-                    src: 'https://placehold.co/64x64',
-                    type: "image/svg+xml",
-                    label: "Downloading several sky images."
-                }],
-                downloadTotal: 0
-            });
+            navigator.serviceWorker.ready.then(worker => {
 
-            Demo.log("Background fetch started...");
+                worker.backgroundFetch.fetch('image-downloads', Demo.BackgroundFetch.urls, {
+                
+                    title: "Downloading images...",
+                    icons: [{ 
+                        sizes: 'XxX',
+                        src: 'https://placehold.co/64x64',
+                        type: "image/svg+xml",
+                        label: "Downloading several sky images."
+                    }],
+                    downloadTotal: 0
+                });
+
+                Demo.log("Background fetch started...");
+
+            });
 
         } catch (exc) {
 
