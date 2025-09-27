@@ -17,6 +17,10 @@ self.addEventListener('backgroundfetchsuccess', e => {
 
         await e.updateUI({ title: 'Download complete!' });
 
+        // Bonux API: BroadcastChananel
+        let channel = new BroadcastChannel("bgFetchChannel");
+        channel.postMessage({ complete: true, total: records.length });
+
     }());
 });
 
