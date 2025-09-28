@@ -7,12 +7,6 @@ Demo.Gamepad = window.Demo.Gamepad || {
     // Demo 1: view controller input
     //
 
-    viewInput: () => {
-
-        // Start input loop
-        requestAnimationFrame(Demo.Gamepad.update);
-    },
-
     // Fires from the window object when a gamepad is connected to the device
     connected: (e) => {
 
@@ -48,10 +42,6 @@ Demo.Gamepad = window.Demo.Gamepad || {
             return;
         }
 
-        // Clear all input displays
-        //let inputs = document.querySelectorAll("input-display");
-        //inputs.forEach((element) => element.innerHTML = "" );
-
         // Get the first controller (assuming an Xbox controller is the first one)
         let gamepad = gamepads[0];
         
@@ -63,10 +53,10 @@ Demo.Gamepad = window.Demo.Gamepad || {
 
                 let inputDisplay = document.getElementById(`Button_${index}`);
 
-                if (inputDisplay)
+                if (inputDisplay) {
                     inputDisplay.innerHTML = "PRESSED";
-
-                // Demo.log(`Button ${index}: <span class="input-value">Pressed</span>`);
+                    setTimeout(() => { inputDisplay.innerHTML = "" }, 500);
+                }
             }
         });
 
@@ -76,11 +66,15 @@ Demo.Gamepad = window.Demo.Gamepad || {
             // Considered a deadzone - need to dial this in for the demo
             if (Math.abs(axisValue) > 0.1) {
                 
-                Demo.log(`Axis ${index}: <span class="input-value">${axisValue.toFixed(4)}</span>`);
+                let inputDisplay = document.getElementById(`Axis_${index}`);
+
+                if (inputDisplay) {
+                    inputDisplay.innerHTML = axisValue;
+                    setTimeout(() => { inputDisplay.innerHTML = "" }, 500);
+                }
             }
         });
 
-        // Loop continuously
         requestAnimationFrame(Demo.Gamepad.update);
     }
 
