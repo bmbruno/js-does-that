@@ -3,11 +3,14 @@ Demo.Gamepad = window.Demo.Gamepad || {
     // Reference to all connected gamepads
     gamepads: [],
 
-    init: () => {
+    //
+    // Demo 1: view controller input
+    //
 
-        window.addEventListener("gamepadconnected", (e) => Demo.Gamepad.connected(e));
-        window.addEventListener("gamepaddisconnected", (e) => Demo.Gamepad.disconnected(e));
+    viewInput: () => {
 
+        // Start input loop
+        requestAnimationFrame(Demo.Gamepad.update);
     },
 
     // Fires from the window object when a gamepad is connected to the device
@@ -30,53 +33,45 @@ Demo.Gamepad = window.Demo.Gamepad || {
 
     },
 
-    //
-    // Demo 1: view controller input
-    // 
-
-    viewInput: () => {
-
-        
-
-    },
-
     // The main loop that reads and displays the controller's state
-    updateGamepads() {
+    update() {
         
         // Get an array of connected gamepads
         const gamepads = navigator.getGamepads();
-        if (gamepads.length === 0 || !gamepads[0]) {
-            // No gamepad connected, stop the loop
+
+        // Exit loop if nothing connected
+        if (gamepads.length === 0 || gamepads[0] == null) {
+
+            Demo.log("No controllers connected.")
             return;
         }
 
         // Get the first controller (assuming an Xbox controller is the first one)
-        gamepad = gamepads[0];
-        const inputsDisplay = document.getElementById("inputs-display");
-        let inputHTML = '';
+        let gamepad = gamepads[0];
+        
+        // TODO: use a nice Xbox controller graphic?
 
         // Display button presses
         gamepad.buttons.forEach((button, index) => {
             if (button.pressed) {
-                inputHTML += `<p>Button ${index}: <span class="input-value">Pressed</span></p>`;
+                Demo.log(`Button ${index}: <span class="input-value">Pressed</span>`);
             }
         });
 
-        // Display axis movement (joysticks)
+        // Display joystickn movement (axis between -1.0 and 1.0)
         gamepad.axes.forEach((axisValue, index) => {
-            // The axis value is a float between -1.0 and 1.0
-            if (Math.abs(axisValue) > 0.1) { // A small dead zone to prevent jitter
-                inputHTML += `<p>Axis ${index}: <span class="input-value">${axisValue.toFixed(4)}</span></p>`;
+
+            // Considered a deadzone - need to dial this in for the demo
+            if (Math.abs(axisValue) > 0.1) {
+                
+                Demo.log(`Axis ${index}: <span class="input-value">${axisValue.toFixed(4)}</span>`);
             }
         });
 
-        // Update the HTML with the current inputs
-        inputsDisplay.innerHTML = inputHTML || '<p>No input detected.</p>';
 
         // Loop continuously
-        requestAnimationFrame(updateGamepads);
+        requestAnimationFrame(Demo.Gamepad.update);
     }
-
 
 };
 
