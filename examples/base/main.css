@@ -64,6 +64,8 @@ header { margin: 2em auto 0 auto; text-align: center; }
 .card .browser-support img { width: 32px; vertical-align: middle; }
 .card .browser-support span { vertical-align: middle; margin-left: 8px; font-weight: bold; }
 
+.card .controller li { margin-bottom: 0; padding-bottom: 0; }
+
 @media (min-width: 48em)
 {
    .content { max-width: 700px }

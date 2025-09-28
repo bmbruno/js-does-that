@@ -22,6 +22,8 @@ Demo.Gamepad = window.Demo.Gamepad || {
         Demo.log(`Num of buttons: ${e.gamepad.buttons.length}`);
         Demo.log(`Num of axes: ${e.gamepad.axes.length}`);
 
+        requestAnimationFrame(Demo.Gamepad.update);
+
     },
 
     // Fires from the window object when a gamepad is disconnected from the device
@@ -46,6 +48,10 @@ Demo.Gamepad = window.Demo.Gamepad || {
             return;
         }
 
+        // Clear all input displays
+        //let inputs = document.querySelectorAll("input-display");
+        //inputs.forEach((element) => element.innerHTML = "" );
+
         // Get the first controller (assuming an Xbox controller is the first one)
         let gamepad = gamepads[0];
         
@@ -54,7 +60,13 @@ Demo.Gamepad = window.Demo.Gamepad || {
         // Display button presses
         gamepad.buttons.forEach((button, index) => {
             if (button.pressed) {
-                Demo.log(`Button ${index}: <span class="input-value">Pressed</span>`);
+
+                let inputDisplay = document.getElementById(`Button_${index}`);
+
+                if (inputDisplay)
+                    inputDisplay.innerHTML = "PRESSED";
+
+                // Demo.log(`Button ${index}: <span class="input-value">Pressed</span>`);
             }
         });
 
@@ -67,7 +79,6 @@ Demo.Gamepad = window.Demo.Gamepad || {
                 Demo.log(`Axis ${index}: <span class="input-value">${axisValue.toFixed(4)}</span>`);
             }
         });
-
 
         // Loop continuously
         requestAnimationFrame(Demo.Gamepad.update);
