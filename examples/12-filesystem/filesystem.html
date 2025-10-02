@@ -40,10 +40,21 @@
 
             <div class="card">
 
-                <h2>Demo: extract file information</h2>
+                <h2>Demo: load and show file contents</h2>
 
                 <button type="button" onclick="Demo.FileSystemAPI.readFile();">Read a File</button>
                 <p>Lets the user pick a local file (.txt, .md), then displays its contents. Information is displayed in this app's console and written out to a file that the user can save on their local file system.</p>
+                
+            </div>
+
+            <div class="card">
+
+                <h2>Demo: save a file locally</h2>
+
+                <button type="button" onclick="Demo.FileSystemAPI.saveFile();">Save a File</button>
+                <p>Save the contents of the textarea to a new file.</p>
+
+                <textarea id="FileContents" style="width: 100%; height: 128px;"></textarea>
                 
             </div>
 

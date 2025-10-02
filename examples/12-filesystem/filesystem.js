@@ -10,7 +10,9 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
 
     readFile: async () => {
 
-        const fileHandle = await window.showOpenFilePicker({
+        Demo.clear();
+
+        let fileHandle = await window.showOpenFilePicker({
 
             // Specific valid files types
             types: [{
@@ -32,7 +34,7 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
         }
 
         // Get the file object from the handle
-        const file = await fileHandle[0].getFile();
+        let file = await fileHandle[0].getFile();
 
         // Read the file contents as text using the File object's text() method
         // This is actually inherited from the Blob interface: https://developer.mozilla.org/en-US/docs/Web/API/Blob
@@ -50,9 +52,17 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
     // Demo 2: save a new file to the local disk (using the sandbox)
     //
 
-    saveFile: () => {
+    saveFile: async () => {
 
+        Demo.clear();
+        let contents = document.getElementById("FileContents").value;
 
+        if (!contents || contents == "") {
+            Demo.log("File contents empty; please provide some content.");
+            return;
+        }
+
+        
 
     }
 
