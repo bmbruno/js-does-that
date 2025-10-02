@@ -62,7 +62,29 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
             return;
         }
 
-        
+        try {
+
+            // Choose where to save
+            let handle = await window.showSaveFilePicker({
+                suggestedName: "demo.txt",
+                types: [{
+                    description: 'Text File',
+                    accept: { 'text/plain': ['.txt'] },
+                }],
+            });
+
+            // Write to dik
+            const writable = await handle.createWritable();
+            await writable.write(contents);
+            await writable.close();
+
+            Demo.log(`Content saved to disk: ${fileName}`);
+
+        } catch (error) {
+            
+            Demo.log(`Exception while saving: ${exc}`);
+
+        }
 
     }
 
