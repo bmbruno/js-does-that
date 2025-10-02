@@ -38,7 +38,7 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
 
         // Read the file contents as text using the File object's text() method
         // This is actually inherited from the Blob interface: https://developer.mozilla.org/en-US/docs/Web/API/Blob
-        const content = await file.text();
+        let content = await file.text();
 
         // Clean up the contents for display
         content = content.replaceAll("\n", "<br/>");
@@ -74,7 +74,7 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
             });
 
             // Write to dik
-            const writable = await handle.createWritable();
+            let writable = await handle.createWritable();
             await writable.write(contents);
             await writable.close();
 
