@@ -38,6 +38,9 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
         // This is actually inherited from the Blob interface: https://developer.mozilla.org/en-US/docs/Web/API/Blob
         const content = await file.text();
 
+        // Clean up the contents for display
+        content = content.replaceAll("\n", "<br/>");
+
         // Output file contents
         Demo.log(content);
 
