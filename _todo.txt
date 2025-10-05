@@ -1,0 +1,17 @@
+--------
+EXAMLPES
+--------
+
+* Verify all examples have:
+    * correct links to MDN
+    * correct links to GitHub source
+
+* Test all examples
+
+----
+DECK
+----
+
+* For each topic:
+    * 1 overview slide (What / Why)
+    * 1 code example slide (shortened to one slide)
