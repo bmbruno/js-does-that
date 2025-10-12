@@ -43,9 +43,10 @@ span.mono { font-family: monospace; font-size: 1.15em; font-family: monospace; f
 span.code, code { background-color: #e4e4e4; padding: 4px 8px; border-radius: 4px; }
 code { font-family: monospace; }
 
-header, .content { max-width: 700px; margin: 0 auto; }
+header, .content { max-width: 95%; }
+
 header { margin: 2em auto 0 auto; text-align: center; }
-.content { margin: 2em auto; padding: 2em;  max-width: 95%; }
+.content { margin: 2em auto; padding: 2em; max-width: 95%; }
 
 .card { margin: 0 0 2em 0; background-color: #FFF; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2); padding: 1.5em; border-radius: 8px; }
 .card:last-of-type { margin-bottom: 0; }
@@ -68,5 +69,5 @@ header { margin: 2em auto 0 auto; text-align: center; }
 
 @media (min-width: 48em)
 {
-   .content { max-width: 700px }
+   header, .content { max-width: 700px }
 }
