@@ -1,0 +1,358 @@
+<!--
+
+    I feel ashmed - I vibe coded this with Gemini.
+
+    But it *did* save me a whole lot of time.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Jumper (Gamepad API)</title>
+    <!-- Load Tailwind CSS for surrounding UI elements -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for the game canvas and elements */
+        :root {
+            --color-player: #3b82f6; /* Blue-500 */
+            --color-platform: #10b981; /* Emerald-500 */
+            --color-sky: #f0f9ff; /* Sky-50 */
+            --color-text: #1f2937; /* Gray-800 */
+        }
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        canvas {
+            border: 4px solid var(--color-text);
+            background-color: var(--color-sky);
+            display: block;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .message-box {
+            background-color: #fef3c7; /* Amber-100 */
+            border-left: 5px solid #f59e0b; /* Amber-500 */
+        }
+    </style>
+</head>
+<body>
+    <div class="p-4 md:p-8 w-full max-w-4xl">
+        <h1 class="text-4xl font-bold text-center mb-4 text-gray-800">Worker Jumper</h1>
+        
+        <!-- Game Container -->
+        <div class="flex flex-col items-center">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+            
+            <!-- Gamepad Status -->
+            <div id="gamepad-status" class="message-box w-full max-w-lg mt-6 p-3 text-sm text-gray-700 rounded-lg">
+                <p>🎮 **Gamepad Status:** Disconnected. Connect a controller and press any button to begin!</p>
+            </div>
+
+            <!-- Controls Info -->
+            <div class="mt-4 p-4 bg-white rounded-lg shadow w-full max-w-lg">
+                <h3 class="font-semibold text-lg text-gray-800 mb-2">Controls:</h3>
+                <ul class="list-disc list-inside text-gray-600">
+                    <li>**Movement:** Left Stick / D-Pad (X-Axis)</li>
+                    <li>**Jump:** 'A' Button (Button 0) or Spacebar (Keyboard Fallback)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- GAME CONSTANTS ---
+        const CANVAS_WIDTH = 800;
+        const CANVAS_HEIGHT = 400;
+        const GRAVITY = 0.5;
+        const JUMP_STRENGTH = -12;
+        const MOVE_SPEED = 5;
+
+        // --- GAME SETUP ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const gamepadStatusDiv = document.getElementById('gamepad-status');
+
+        let animationFrameId;
+        let gamepadIndex = null;
+
+        // --- GAME OBJECTS ---
+
+        class Player {
+            constructor(x, y, width, height) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.dx = 0; // velocity x
+                this.dy = 0; // velocity y
+                this.isGrounded = false;
+                this.maxJumps = 2; // Double jump
+                this.jumpCount = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-player');
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+
+            update(platforms, inputState) {
+                // 1. Apply Gravity
+                this.dy += GRAVITY;
+                
+                // 2. Handle Horizontal Movement
+                this.dx = inputState.moveX * MOVE_SPEED;
+                this.x += this.dx;
+
+                // 3. Handle Jumping (only apply jump if the jump action is triggered)
+                if (inputState.jump) {
+                    if (this.isGrounded) {
+                        this.dy = JUMP_STRENGTH;
+                        this.isGrounded = false;
+                        this.jumpCount = 1; // Reset jump count after first jump
+                    } else if (this.jumpCount < this.maxJumps) {
+                        this.dy = JUMP_STRENGTH;
+                        this.jumpCount++;
+                    }
+                    // Reset jump state immediately after use
+                    inputState.jump = false; 
+                }
+
+                // 4. Apply Vertical Movement
+                this.y += this.dy;
+
+                // 5. Check Collisions with Platforms
+                this.isGrounded = false;
+                for (const platform of platforms) {
+                    if (this.checkCollision(platform)) {
+                        // Collision detected. Determine collision side.
+                        const collisionDirection = this.getCollisionDirection(platform);
+                        
+                        if (collisionDirection === 'bottom' && this.dy >= 0) {
+                            // Hit the top of the platform (grounded)
+                            this.y = platform.y - this.height; // Snap player to platform top
+                            this.dy = 0; // Stop vertical movement
+                            this.isGrounded = true;
+                            this.jumpCount = 0; // Reset jump count
+                        } else if (collisionDirection === 'top' && this.dy < 0) {
+                            // Hit the bottom of the platform
+                            this.y = platform.y + platform.height;
+                            this.dy = 0; // Stop upward movement
+                        } else if (collisionDirection === 'left' || collisionDirection === 'right') {
+                            // Hit the sides (prevent horizontal pass-through)
+                            this.x -= this.dx; 
+                            this.dx = 0;
+                        }
+                    }
+                }
+
+                // 6. Keep player within canvas bounds (simple walls)
+                if (this.x < 0) this.x = 0;
+                if (this.x + this.width > canvas.width) this.x = canvas.width - this.width;
+
+                // Simple fall check (game over state not implemented, just reset)
+                if (this.y > canvas.height + 50) {
+                    this.reset();
+                }
+            }
+            
+            // AABB Collision Check
+            checkCollision(rect) {
+                return (
+                    this.x < rect.x + rect.width &&
+                    this.x + this.width > rect.x &&
+                    this.y < rect.y + rect.height &&
+                    this.y + this.height > rect.y
+                );
+            }
+
+            // Determines which side of the platform was hit for correct physics response
+            getCollisionDirection(rect) {
+                const overlapX = Math.min(this.x + this.width, rect.x + rect.width) - Math.max(this.x, rect.x);
+                const overlapY = Math.min(this.y + this.height, rect.y + rect.height) - Math.max(this.y, rect.y);
+
+                if (overlapX > 0 && overlapY > 0) {
+                    // Find the axis with the minimum overlap
+                    if (overlapX < overlapY) {
+                        return this.x < rect.x ? 'left' : 'right';
+                    } else {
+                        return this.y + this.height > rect.y + rect.height / 2 ? 'top' : 'bottom';
+                    }
+                }
+                return null;
+            }
+
+            reset() {
+                this.x = 50;
+                this.y = CANVAS_HEIGHT - 100;
+                this.dx = 0;
+                this.dy = 0;
+                this.isGrounded = true;
+                this.jumpCount = 0;
+            }
+        }
+
+        class Platform {
+            constructor(x, y, width, height) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+            }
+
+            draw() {
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-platform');
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                ctx.strokeStyle = '#065f46'; // Emerald-800 border
+                ctx.lineWidth = 2;
+                ctx.strokeRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+        // Initialize game state
+        const player = new Player(50, CANVAS_HEIGHT - 100, 30, 30);
+        const platforms = [
+            new Platform(0, CANVAS_HEIGHT - 20, CANVAS_WIDTH, 20), // Ground
+            new Platform(150, 300, 150, 20),
+            new Platform(350, 250, 100, 20),
+            new Platform(550, 200, 150, 20),
+            new Platform(100, 150, 150, 20),
+            new Platform(600, 100, 100, 20)
+        ];
+
+        // Global object to track current input state
+        const inputState = {
+            moveX: 0, // -1 (left), 0 (none), 1 (right)
+            jump: false,
+            // Variables to prevent repeated jumps on button hold (edge-triggered)
+            wasJumpPressed: false,
+        };
+
+        // --- GAMEPAD API HANDLERS ---
+
+        let connectedGamepad = null;
+
+        window.addEventListener('gamepadconnected', (event) => {
+            connectedGamepad = event.gamepad;
+            gamepadIndex = event.gamepad.index;
+            console.log(`Gamepad connected at index ${gamepadIndex}: ${connectedGamepad.id}`);
+            gamepadStatusDiv.innerHTML = `🎮 **Gamepad Status:** Connected! Controller: **${connectedGamepad.id}**`;
+            gamepadStatusDiv.classList.remove('message-box');
+            gamepadStatusDiv.classList.add('bg-green-100', 'border-green-500');
+        });
+
+        window.addEventListener('gamepaddisconnected', (event) => {
+            connectedGamepad = null;
+            gamepadIndex = null;
+            console.log(`Gamepad disconnected from index ${event.gamepad.index}`);
+            gamepadStatusDiv.innerHTML = `🎮 **Gamepad Status:** Disconnected. Connect a controller and press any button to begin!`;
+            gamepadStatusDiv.classList.add('message-box');
+            gamepadStatusDiv.classList.remove('bg-green-100', 'border-green-500');
+            // Stop polling if the last gamepad is gone
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+                gameLoop(); // Restart game loop to rely on keyboard only
+            }
+        });
+
+        // Function to process gamepad input
+        function processGamepadInput() {
+            if (gamepadIndex === null) {
+                return;
+            }
+
+            const gamepads = navigator.getGamepads();
+            const gamepad = gamepads[gamepadIndex];
+
+            if (gamepad) {
+                // 1. Horizontal Movement (Axes 0 - Left Stick X or D-Pad X)
+                const xAxis = gamepad.axes[0] || 0;
+
+                if (Math.abs(xAxis) > 0.1) { // Apply deadzone
+                    inputState.moveX = Math.sign(xAxis);
+                } else {
+                    inputState.moveX = 0;
+                }
+
+                // 2. Jump (Button 0 is A/Cross on most controllers)
+                const jumpButton = gamepad.buttons[0];
+                const isJumpPressed = jumpButton && jumpButton.pressed;
+
+                if (isJumpPressed && !inputState.wasJumpPressed) {
+                    inputState.jump = true;
+                }
+                inputState.wasJumpPressed = isJumpPressed;
+            }
+        }
+
+        // --- KEYBOARD FALLBACK (FOR NON-GAMEPAD USERS) ---
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'd') {
+                inputState.moveX = 1;
+            } else if (e.key === 'ArrowLeft' || e.key === 'a') {
+                inputState.moveX = -1;
+            } else if (e.key === ' ' || e.key === 'w' || e.key === 'ArrowUp') {
+                if (!inputState.wasJumpPressed) {
+                    inputState.jump = true;
+                }
+                inputState.wasJumpPressed = true;
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if ((e.key === 'ArrowRight' || e.key === 'd') && inputState.moveX === 1) {
+                inputState.moveX = 0;
+            } else if ((e.key === 'ArrowLeft' || e.key === 'a') && inputState.moveX === -1) {
+                inputState.moveX = 0;
+            } else if (e.key === ' ' || e.key === 'w' || e.key === 'ArrowUp') {
+                inputState.wasJumpPressed = false;
+            }
+        });
+
+        // --- GAME LOOP ---
+
+        function update() {
+            // Process input regardless of source (Gamepad or Keyboard)
+            processGamepadInput();
+
+            // Update player and game elements
+            player.update(platforms, inputState);
+        }
+
+        function draw() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Platforms
+            platforms.forEach(p => p.draw());
+
+            // Draw Player
+            player.draw();
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+
+            // Loop using requestAnimationFrame
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        // Start the game loop when the window loads
+        window.onload = function () {
+            gameLoop();
+        };
+
+    </script>
+</body>
+</html>

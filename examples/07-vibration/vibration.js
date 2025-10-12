@@ -6,6 +6,9 @@ Demo.Vibration = window.Demo.Vibration || {
 
     vibrate: () => {
 
+        Demo.clear();
+        Demo.log("One short vibration...");
+
         navigator.vibrate([ 500 ]);
 
     },
@@ -15,6 +18,9 @@ Demo.Vibration = window.Demo.Vibration || {
     //
 
     vibratePattern: () => {
+
+        Demo.clear();
+        Demo.log("Alternating short and long vibrations...");
 
         // Alternates between vibrate and pause
         // This example: 
