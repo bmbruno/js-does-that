@@ -14,16 +14,6 @@ Demo.BackgroundFetch = window.Demo.BackgroundFetch || {
 
     downloadFiles: async () => {
 
-        /*
-        // Check for existing service workers and remove them (so we start fresh every time)
-        let registeredWorkers = await navigator.serviceWorker.getRegistrations();
-        registeredWorkers.forEach((worker) => {
-            worker.unregister().then(() => {
-                console.log("Service worker unregistered.");
-            })
-        });
-        */
-
         // Register server worker to handle background fetch
         let worker = await navigator.serviceWorker.register("download-serviceworker.js");
         Demo.log("Service worker has been registered.");
@@ -41,22 +31,29 @@ Demo.BackgroundFetch = window.Demo.BackgroundFetch || {
         try {
 
             // Wait for the service worker to be ready
-            navigator.serviceWorker.ready.then(worker => {
+            navigator.serviceWorker.ready.then(async (worker) => {
 
                 // Start the background fetch
-                worker.backgroundFetch.fetch('image-downloads', Demo.BackgroundFetch.urls, {
+                let download = await worker.backgroundFetch.fetch('image-downloads', Demo.BackgroundFetch.urls, {
                 
                     title: "Downloading images...",
                     icons: [{ 
-                        sizes: 'XxX',
+                        sizes: '64x64',
                         src: 'https://placehold.co/64x64',
                         type: "image/svg+xml",
                         label: "Downloading several sky images."
                     }],
-                    downloadTotal: 12131231
+
+                    // In bytes; question for the reader - how would you know this ahead of time?
+                    downloadTotal: 5869568
                 });
 
                 Demo.log("Background fetch started...");
+
+                download.addEventListener('progress', () => {
+                    Demo.log(`Progress: ${download.downloaded} of ${download.downloadTotal}`);
+
+                });
 
             });
 
