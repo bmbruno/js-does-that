@@ -1,3 +1,9 @@
+/*
+
+This is an incomplete demo, but feel free to learn from what's already here!
+
+*/
+
 Demo.IndexedDB = window.Demo.IndexedDB || {
 
     dbName: 'USS-Enterprise-1701-D',
