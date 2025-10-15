@@ -73,7 +73,7 @@ Demo.FileSystemAPI = window.Demo.FileSystemAPI || {
                 }],
             });
 
-            // Write to dik
+            // Write to disk
             let writable = await handle.createWritable();
             await writable.write(contents);
             await writable.close();
